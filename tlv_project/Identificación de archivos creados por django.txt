@@ -1,0 +1,13 @@
+-settings.py contiene todos los ajustes del sitio. Es donde registramos todas las aplicaciones que creamos, 
+la localización de nuestros ficheros estáticos, los detalles de configuración de la base de datos, etc.
+-urls.py define los mapeos url-vistas. A pesar de que éste podría contener todo el código del mapeo url, 
+es más común delegar algo del mapeo a las propias aplicaciones, como verás más tarde.
+-wsgi.py se usa para ayudar a la aplicación Django a comunicarse con el servidor web. 
+Puedes tratarlo como código base que puedes utilizar de plantilla.
+-manage.py se usa para crear aplicaciones, trabajar con bases de datos y empezar el desarrollo del servidor web.
+-asgi.py contiene la configuración para la implementación opcional a la Interfaz de puerta de enlace de servidor asíncrono,
+que proporciona un estándar para las apps que son sincronizadas o ASGI, y se considera como sucesor de WSGI.
+-__init__.py se utiliza para realizar configuraciones de importación. Algo que se utiliza mucho en este archivo es la 
+importación de clases, funciones, etc, para que puedan ser utilizadas en otros paquetes.
+-views.py es una función en Python que hace una solicitud Web y devuelve una respuesta Web, esta respuesta puede ser 
+el contenido de una página, un error 404, una imagen, un documento XML, entre muchas cosas más.

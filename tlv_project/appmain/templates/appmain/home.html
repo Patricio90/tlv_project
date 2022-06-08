@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type='text/css' href="{% static 'css/estilos.css' %">
+</head>
+<body>
+    <h1>Guía para la generación de entorno virtual con Django y generación de templates HTML
+    </h1>
+    <ol>
+        <li>Crear carpeta contenedora del futuro proyecto a desarrollar</li>
+        <li>Abrir terminal de editor de código</li>
+        <li>Crear entorno virtual con el comando "python -m venv (nombre del entorno virtual)" + ENTER</li>
+        <li>Activar el entorno virtual con el comando "(nombre del entorno virtual)\Scripts\activate" + ENTER</li>
+        <li>Una vez activo el entorno virtual, instalar Django con el comando “pip install Django” + ENTER</li>
+        <li>Una vez descargado el paquete de Django, confirmar que esté correctamente instalado con el comando “pip freeze” + ENTER para que muestre todas las librerías disponibles en el entorno virtual.</li>
+        <li>Una vez confirmada la instalación de Django, ejecutar “django-admin” para visualizar la lista de comandos que posee la librería django.</li>
+        <li>Una vez desplegada la lista de comandos de django, debemos generar nuestro primer proyecto en django, para esto debemos ejecutar el comando “django-admin startproject nombre del proyecto” + ENTER</li>
+        <li>Una vez creado el proyecto, verifiquemos que nos ha creado el proyecto que hemos decidido con sus respectivas carpetas “.py”.</li>
+        <li>Una vez verificado que se ha creado correctamente el proyecto con sus respectivas carpetas .py debemos correr django para verificar que las conexiones están OK, para esto debemos ejecutar “python manage.py runserver” + ENTER</li>
+        <li>Una vez ejecutado el comando anterior en la terminal del editor de código, accedemos a la ruta "http://127.0.0.1" que nos generó para visualizar nuestra página.</li>
+        <li>Posteriormente continuaremos creando un aplicativo ejecutando en la terminal “python manage.py startapp nombredelaplicativo”</li>
+        <li>Se genera un archivo urls.py en el aplicativo, copiando la misma estructura de código que trae por defecto la carpeta del proyecto principal, borrando la importación de admin y el path de admin, ya que, este es propio del urls.py del archivo principal del proyecto.</li>
+        <li>Posteriormente nos dirigimos al views.py (de la carpeta aplicativa) para crear nuestra función que renderizara nuestra futura vista HTML, (que crearemos más delante). Para activar la función render debemos importarla desde Django con la siguiente sentencia “from django.shortcuts import render”. Para la generación de la función, debemos darle como parámetro “request” + la ruta (ejemplo: (request,'appmain/home.html')) donde va a estar contenido nuestro HTML que vamos a crear posteriormente.</li>
+        <p>from django.shortcuts import render <br>
+            def yaru(request): <br>
+            &nbsp &nbspreturn render(request,'appmain/home.html')</p>
+        <li>Dentro del aplicativo appmain, creamos la carpeta "templates\appmain" que contendrá nuestros archivos html</li>
+        <li>Se crea la plantilla de formato html que contendrá toda la estructura de nuestra página home</li>
+        <li>En urls.py del aplicativo (appmain) enrutamos nuestra plantilla home con nuestro archivo views.py del aplicativo. Para esto debemos importar lo siguiente:</li>
+        <p>from django.urls import path <br>
+            from . import views <br>
+            urlpatterns = [ <br>
+            &nbsp &nbsppath('', views.yaru, name ='appmain' ) <br>
+        ]
+        </p>
+            
+        <li>En el urls.py del archivo principal realizamos el enrutamiento con el archivo urls.py del aplicativo de la siguiente forma:</li>
+        <p>from django.contrib import admin <br>
+            from django.urls import path, include <br>
+            urlpatterns = [ <br>
+                &nbsp &nbsppath('admin/', admin.site.urls), <br>
+                &nbsp &nbsppath('', include('appmain.urls')) <br>
+            ]</p>
+        <li>Nos dirigimos al apps.py del aplicativo para copiar el nombre de la clase "AppmainConfig"</li>
+        <li>Posteriormente nos dirigimos a settings.py del aplicativo principal para realizar la instalación del aplicativo appmain:</li>
+        <p>
+            INSTALLED_APPS = [ <br>
+    'appmain.apps.AppmainConfig', <br>
+    'django.contrib.admin', <br>
+    'django.contrib.auth', <br>
+    'django.contrib.contenttypes', <br>
+    'django.contrib.sessions', <br>
+    'django.contrib.messages', <br>
+    'django.contrib.staticfiles', <br>
+    ] <br>
+        </p>
+        <li>En la ventana terminal ejecutar el comando python manage.py runserver</li>
+    </ol>
+      
+</body>
+</html>
